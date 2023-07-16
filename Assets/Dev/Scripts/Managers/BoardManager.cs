@@ -33,7 +33,7 @@ public class BoardManager : MonoBehaviour
     public void SetBoardSize(Vector2Int size)
     {
         boardSize = size;
-        boardTileList.FindAll(x => x.Coordinate.X >= size.y || x.Coordinate.Y >= size.y).ForEach(x => x.Active = false);
+        boardTileList.FindAll(x => x.Coordinate.X >= size.x || x.Coordinate.Y >= size.y).ForEach(x => x.Active = false);
     }
     private void SetTiles()
     {

@@ -6560,7 +6560,7 @@ MonoBehaviour:
   - {fileID: 1426104586}
   - {fileID: 655977033}
   boardTileHolderTransform: {fileID: 1686371858}
-  startBoardSize: {x: 10, y: 10}
+  startBoardSize: {x: 5, y: 3}
   boardSize: {x: 0, y: 0}
 --- !u!4 &1807959551
 Transform:
