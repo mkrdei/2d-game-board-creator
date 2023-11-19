@@ -7,15 +7,18 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private CameraManager cameraManager;
-
     [SerializeField] private BoardTile boardTilePrefab;
-    [SerializeField] private List<BoardTile> boardTileList;
     [SerializeField] private Transform boardTileHolderTransform;
-    private Vector2 prevBoardSize;
+    [Header("Settings")]
     [SerializeField] private Vector2 boardSize;
+    [SerializeField] private bool IsHexagon;
+    [Header("Lists")]
+    [SerializeField] private List<BoardTile> boardTileList;
     public Vector2 BoardSize { get { return boardSize; } set { SetBoardSize(value); } }
-    // Start is called before the first frame update
+    private Vector2 prevBoardSize;
+
     void Awake()
     {
         Init();
