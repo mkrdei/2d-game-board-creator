@@ -10,7 +10,7 @@ public class BoardTile : MonoBehaviour
     [SerializeField] private bool _visible = false;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    public Coordinate Coordinate { get { return _coordinate; } private set { _coordinate = value; } }
+    public Coordinate Coordinate { get { return _coordinate; } set { _coordinate = value; OnSetCoordinate(); } }
     public bool Active { get { return _active; } set { SetActive(value); } }
     public bool Visible { get { return _visible; } set { SetVisible(value); } }
     private void Awake()
@@ -27,8 +27,8 @@ public class BoardTile : MonoBehaviour
         _visible = visible;
         _spriteRenderer.enabled = visible;
     }
-    public void SetCoordinate()
+    private void OnSetCoordinate()
     {
-        Coordinate = new Coordinate((int)transform.localPosition.x, -(int)transform.localPosition.y);
+        transform.localPosition = new Vector3(Coordinate.X, -Coordinate.Y, 0);
     }
 }
