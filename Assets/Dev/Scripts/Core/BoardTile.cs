@@ -6,31 +6,25 @@ using static BoardTile;
 
 public class BoardTile : MonoBehaviour
 {
-    [SerializeField] private Coordinate _coordinate;
-    [SerializeField] private bool _active = false;
-    [SerializeField] private bool _visible = false;
+    [HideInInspector] public BoardTile_LevelData LevelData;
+    [SerializeField] public List<BoardTile_ColliderData> ColliderDataList;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    
-    public Coordinate Coordinate { get { return _coordinate; } set { _coordinate = value; } }
-    public bool Active { get { return _active; } set { SetActive(value); } }
-    public bool Visible { get { return _visible; } set { SetVisible(value); } }
-    public void Init(EBoardTileType boardTileType, Coordinate coordinate, bool active, bool visible, Sprite sprite)
+    public void Init(BoardTile_LevelData levelData)
     {
-        BoardTileType = boardTileType;
-        Coordinate = coordinate;
-        Active = active;
-        Visible = visible;
-        _spriteRenderer.sprite = sprite;
-        transform.localPosition = new Vector3(coordinate.X, -coordinate.Y * (BoardTileType == EBoardTileType.Hexagon ? 0.85f : 1));
+        LevelData = levelData;
+
+        ColliderDataList.ForEach(colliderData => { colliderData.collider.enabled = (colliderData.boardTileType == LevelData.BoardTileType); });
+        _spriteRenderer.sprite = LevelData.InitialSprite;
+        transform.localPosition = new Vector3(LevelData.Coordinate.X, -LevelData.Coordinate.Y * (levelData.BoardTileType == EBoardTileType.Hexagon ? 0.85f : 1));
     }
     private void SetActive(bool active)
     {
-        _active = active;
+        LevelData.Active = active;
         gameObject.SetActive(active);
     }
     private void SetVisible(bool visible)
     {
-        _visible = visible;
+        LevelData.Visible = visible;
         _spriteRenderer.enabled = visible;
     }
 
@@ -56,7 +50,6 @@ public class BoardTile : MonoBehaviour
         Square,
         Hexagon
     }
-    public EBoardTileType BoardTileType;
     public enum EBoardTileState
     {
         None,
@@ -70,4 +63,5 @@ public class BoardTile : MonoBehaviour
         MouseDown
     }
     public EBoardTileInteractState BoardTileInteractState;
+
 }

@@ -7,15 +7,23 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
+    [Space(10)]
     [Header("References")]
     [SerializeField] private CameraManager _cameraManager;
     [SerializeField] private BoardTile _boardTilePrefab;
-    [SerializeField] private BoardTile_SpriteDataCollection _spriteDataCollection;
     [SerializeField] private Transform _boardTileHolderTransform;
+
+    [Space(10)]
+    [Header("Data")]
+    [SerializeField] private List<BoardTile_SpriteData> _spriteDataList;
+
+    [Space(10)]
     [Header("Settings")]
     [SerializeField] private Vector2 _boardSize;
     [SerializeField] private BoardTile.EBoardTileType _boardTileType;
-    [Header("Lists")]
+
+    [Space(10)]
+    [Header("Instantiated Prefab Lists")]
     [SerializeField] private List<BoardTile> _boardTiles;
     public Vector2 BoardSize 
     { 
@@ -57,7 +65,7 @@ public class BoardManager : MonoBehaviour
     }
     public void DeactivateOutOfBoardSizeTiles()
     {
-        _boardTiles.FindAll(x => x.Coordinate.X >= _boardSize.x || x.Coordinate.Y >= _boardSize.y).ForEach(x => x.Active = false);
+        _boardTiles.FindAll(x => x.LevelData.Coordinate.X >= _boardSize.x || x.LevelData.Coordinate.Y >= _boardSize.y).ForEach(x => x.LevelData.Active = false);
     }
     private void CreateTiles()
     {
@@ -76,14 +84,9 @@ public class BoardManager : MonoBehaviour
                     isOutOfRowLimit = _boardSize.x - distanceFromMiddle <= x;
                     if (isOutOfRowLimit) continue;
                 }
-                BoardTile alreadyExistTile = _boardTiles.Find(j => j.Coordinate.Equals(coordinate));
-                if (alreadyExistTile)
-                {
-                    alreadyExistTile.Active = true;
-                    continue;
-                }
                 var boardTile = Instantiate(_boardTilePrefab, _boardTileHolderTransform);
-                boardTile.Init(_boardTileType, coordinate, true, true, _spriteDataCollection.SpriteDataList.Find(j => j.boardTileType == _boardTileType).sprite);
+                BoardTile_LevelData boardTile_Data = new BoardTile_LevelData(_boardTileType, coordinate, true, true, _spriteDataList.Find(j => j.boardTileType == _boardTileType).sprite);
+                boardTile.Init(boardTile_Data);
                 _boardTiles.Add(boardTile);
             }
         }
