@@ -7,9 +7,9 @@ namespace Dev.Scripts.Utilities
     [System.Serializable]
     public struct Coordinate
     {
-        public int X;
-        public int Y;
-        public Coordinate(int x, int y)
+        public float X;
+        public float Y;
+        public Coordinate(float x, float y)
         {
             X = x;
             Y = y;
