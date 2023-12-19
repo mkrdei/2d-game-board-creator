@@ -8,25 +8,24 @@ using UnityEngine;
 public class BoardManager : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private CameraManager cameraManager;
-    [SerializeField] private BoardTile boardTilePrefab;
-    [SerializeField] private BoardTile_SpriteDataCollection spriteDataCollection;
-    [SerializeField] private Transform boardTileHolderTransform;
+    [SerializeField] private CameraManager _cameraManager;
+    [SerializeField] private BoardTile _boardTilePrefab;
+    [SerializeField] private BoardTile_SpriteDataCollection _spriteDataCollection;
+    [SerializeField] private Transform _boardTileHolderTransform;
     [Header("Settings")]
-    [SerializeField] private Vector2 boardSize;
-    [SerializeField] private BoardTile.EBoardTileType BoardTileType;
+    [SerializeField] private Vector2 _boardSize;
+    [SerializeField] private BoardTile.EBoardTileType _boardTileType;
     [Header("Lists")]
-    [SerializeField] private List<BoardTile> boardTiles;
-    [field: SerializeField]
+    [SerializeField] private List<BoardTile> _boardTiles;
     public Vector2 BoardSize 
     { 
         get 
         { 
-            return boardSize; 
+            return _boardSize; 
         } 
         set 
         {
-            boardSize = value; 
+            _boardSize = value; 
         } 
     }
 
@@ -49,55 +48,55 @@ public class BoardManager : MonoBehaviour
     }
     private void CenterBoard()
     {
-        boardTileHolderTransform.transform.position = new Vector3((float)-BoardSize.x / 2f + 0.5f, (float)BoardSize.y / 2f - 0.5f, 0);
-        cameraManager.OrthographicSize = (float)Mathf.Max(BoardSize.x, BoardSize.y) * 1.2f;
+        _boardTileHolderTransform.transform.position = new Vector3((float)-BoardSize.x / 2f + 0.5f, (float)BoardSize.y / 2f - 0.5f, 0);
+        _cameraManager.OrthographicSize = (float)Mathf.Max(BoardSize.x, BoardSize.y) * 1.2f;
     }
     public void SetBoardSize(Vector2 size)
     {
-        boardSize = size;
+        _boardSize = size;
     }
     public void DeactivateOutOfBoardSizeTiles()
     {
-        boardTiles.FindAll(x => x.Coordinate.X >= boardSize.x || x.Coordinate.Y >= boardSize.y).ForEach(x => x.Active = false);
+        _boardTiles.FindAll(x => x.Coordinate.X >= _boardSize.x || x.Coordinate.Y >= _boardSize.y).ForEach(x => x.Active = false);
     }
     private void CreateTiles()
     {
         DestroyBoardTiles();
 
-        for (int x = 0; x < boardSize.x; x++)
+        for (int x = 0; x < _boardSize.x; x++)
         {
-            for (int y = 0; y < boardSize.y; y++)
+            for (int y = 0; y < _boardSize.y; y++)
             {
                 Coordinate coordinate = new Coordinate(x, y);
                 bool isOutOfRowLimit = false;
-                if (BoardTileType == BoardTile.EBoardTileType.Hexagon)
+                if (_boardTileType == BoardTile.EBoardTileType.Hexagon)
                 {
-                    float distanceFromMiddle = Mathf.Abs((int)(boardSize.y/2) - y);
+                    float distanceFromMiddle = Mathf.Abs((int)(_boardSize.y/2) - y);
                     coordinate.X += distanceFromMiddle * 0.5f;
-                    isOutOfRowLimit = boardSize.x - distanceFromMiddle <= x;
+                    isOutOfRowLimit = _boardSize.x - distanceFromMiddle <= x;
                     if (isOutOfRowLimit) continue;
                 }
-                BoardTile alreadyExistTile = boardTiles.Find(j => j.Coordinate.Equals(coordinate));
+                BoardTile alreadyExistTile = _boardTiles.Find(j => j.Coordinate.Equals(coordinate));
                 if (alreadyExistTile)
                 {
                     alreadyExistTile.Active = true;
                     continue;
                 }
-                var boardTile = Instantiate(boardTilePrefab, boardTileHolderTransform);
-                boardTile.Init(BoardTileType, coordinate, true, true, spriteDataCollection.spriteDataList.Find(j => j.BoardTileType == BoardTileType).Sprite);
-                boardTiles.Add(boardTile);
+                var boardTile = Instantiate(_boardTilePrefab, _boardTileHolderTransform);
+                boardTile.Init(_boardTileType, coordinate, true, true, _spriteDataCollection.SpriteDataList.Find(j => j.boardTileType == _boardTileType).sprite);
+                _boardTiles.Add(boardTile);
             }
         }
     }
     private void DestroyBoardTiles()
     {
-        if (boardTiles.Count == 0)
+        if (_boardTiles.Count == 0)
             return;
-        for(int i = boardTiles.Count - 1; i >= 0; i--)
+        for(int i = _boardTiles.Count - 1; i >= 0; i--)
         {
-            Destroy(boardTiles[i].gameObject);
+            Destroy(_boardTiles[i].gameObject);
         }
-        boardTiles.Clear();
+        _boardTiles.Clear();
     }
     private void ResetScene()
     {

@@ -6,12 +6,12 @@ using UnityEngine;
 [CreateAssetMenu]
 public class BoardTile_SpriteDataCollection : ScriptableObject
 {
-    public List<SpriteData> spriteDataList;
+    public List<SpriteData> SpriteDataList;
 
     [Serializable]
     public class SpriteData
     {
-        public BoardTile.EBoardTileType BoardTileType;
-        public Sprite Sprite;
+        public BoardTile.EBoardTileType boardTileType;
+        public Sprite sprite;
     }
 }

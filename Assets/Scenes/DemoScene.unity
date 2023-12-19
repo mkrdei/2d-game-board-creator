@@ -344,13 +344,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07188ea59c7fa94e96b25bec46f66e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraManager: {fileID: 2037743771}
-  boardTilePrefab: {fileID: 2297281205914604706, guid: 49484229b1d71c74a90c91da196234d2, type: 3}
-  spriteDataCollection: {fileID: 11400000, guid: b4cb0424e99b5ec4ab7c52bede757e18, type: 2}
-  boardTileHolderTransform: {fileID: 1686371858}
-  boardSize: {x: 5, y: 5}
-  BoardTileType: 2
-  boardTiles: []
+  _cameraManager: {fileID: 2037743771}
+  _boardTilePrefab: {fileID: 2297281205914604706, guid: 49484229b1d71c74a90c91da196234d2, type: 3}
+  _spriteDataCollection: {fileID: 11400000, guid: b4cb0424e99b5ec4ab7c52bede757e18, type: 2}
+  _boardTileHolderTransform: {fileID: 1686371858}
+  _boardSize: {x: 5, y: 5}
+  _boardTileType: 2
+  _boardTiles: []
 --- !u!4 &1807959551
 Transform:
   m_ObjectHideFlags: 0
