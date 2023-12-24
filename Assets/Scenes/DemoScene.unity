@@ -151,10 +151,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1807959551}
   - {fileID: 2037743772}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &44872931
 GameObject:
@@ -250,7 +249,7 @@ RectTransform:
   m_Children:
   - {fileID: 99037043}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -362,7 +361,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -514,7 +513,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1686371857
 GameObject:
@@ -546,7 +545,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &1686371859
 Grid:
@@ -571,7 +570,7 @@ GameObject:
   - component: {fileID: 1807959551}
   - component: {fileID: 1807959550}
   m_Layer: 0
-  m_Name: BoardManager
+  m_Name: BoardCreator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -592,14 +591,16 @@ MonoBehaviour:
   _cameraManager: {fileID: 2037743771}
   _boardTilePrefab: {fileID: 2297281205914604706, guid: 49484229b1d71c74a90c91da196234d2, type: 3}
   _boardTileHolderTransform: {fileID: 1686371858}
-  _spriteDataList:
-  - boardTileType: 1
-    sprite: {fileID: 7482667652216324306, guid: 3a9210a0af1f17941802b9288370b3ce, type: 3}
-  - boardTileType: 2
-    sprite: {fileID: 21300000, guid: 3e02263beee19f94fa03db513d4a332b, type: 3}
-  _boardSize: {x: 3, y: 3}
-  _boardTileType: 2
-  _boardTiles: []
+  _data:
+    spriteDataList:
+    - boardTileType: 0
+      sprite: {fileID: 7482667652216324306, guid: 3a9210a0af1f17941802b9288370b3ce, type: 3}
+    - boardTileType: 1
+      sprite: {fileID: 21300000, guid: 3e02263beee19f94fa03db513d4a332b, type: 3}
+    boardTileType: 1
+    boardSize: {x: 5, y: 5}
+    initialBoardTileColor: {r: 1, g: 1, b: 1, a: 1}
+    boardTiles: []
 --- !u!4 &1807959551
 Transform:
   m_ObjectHideFlags: 0
@@ -612,8 +613,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 43512181}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2037743770
 GameObject:
@@ -659,5 +660,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 43512181}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

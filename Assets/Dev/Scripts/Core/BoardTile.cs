@@ -1,48 +1,52 @@
 using Dev.Scripts.Utilities;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
-using static BoardTile;
 
 public class BoardTile : MonoBehaviour
 {
-    [HideInInspector] public BoardTile_LevelData LevelData;
-    [SerializeField] public List<BoardTile_ColliderData> ColliderDataList;
+    public BoardTileData Data;
+    [SerializeField] private List<BoardTile_ColliderData> _colliderDataList;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    public void Init(BoardTile_LevelData levelData)
-    {
-        LevelData = levelData;
 
-        ColliderDataList.ForEach(colliderData => { colliderData.collider.enabled = (colliderData.boardTileType == LevelData.BoardTileType); });
-        _spriteRenderer.sprite = LevelData.InitialSprite;
-        transform.localPosition = new Vector3(LevelData.Coordinate.X, -LevelData.Coordinate.Y * (levelData.BoardTileType == EBoardTileType.Hexagon ? 0.85f : 1));
-    }
-    private void SetActive(bool active)
+    
+
+    public void Init(BoardTileData boardTileData)
     {
-        LevelData.Active = active;
-        gameObject.SetActive(active);
+        Data = boardTileData;
+        SetPosition();
+        SetCollider(BoardManager.Data.boardTileType);
+        _spriteRenderer.sprite = Data.InitialSprite;
+        _spriteRenderer.color = boardTileData.InitialColor;
     }
-    private void SetVisible(bool visible)
+    private void SetCollider(EBoardTileType boardTileType)
     {
-        LevelData.Visible = visible;
-        _spriteRenderer.enabled = visible;
+        _colliderDataList.ForEach(colliderData => { colliderData.collider.enabled = (colliderData.boardTileType == boardTileType); });
+    }
+    private void SetPosition()
+    {
+        transform.localPosition = new Vector3(Data.Coordinate.X, -Data.Coordinate.Y * BoardManager.SpaceBetweenTiles.y);
     }
 
     private void OnMouseOver()
     {
         if (BoardTileState == EBoardTileState.Selected) return;
-        _spriteRenderer.color = Color.red;
+        Data.CurrentColor = Color.red;
+        _spriteRenderer.color = Data.CurrentColor;
     }
     private void OnMouseExit()
     {
         if (BoardTileState == EBoardTileState.Selected) return;
-        _spriteRenderer.color = Color.white;
+        Data.CurrentColor = Data.InitialColor;
+        _spriteRenderer.color = Data.CurrentColor;
     }
     private void OnMouseDown()
     {
         BoardTileState = EBoardTileState.Selected;
         BoardTileInteractState = EBoardTileInteractState.MouseDown;
-        _spriteRenderer.color = Color.green;
+        Data.CurrentColor = Color.green;
+        _spriteRenderer.color = Data.CurrentColor;
     }
     public enum EBoardTileType
     {

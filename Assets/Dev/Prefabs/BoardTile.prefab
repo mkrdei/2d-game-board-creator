@@ -47,11 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf42ee4ce2cbc534eae8002a623e0014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelData: {fileID: 0}
+  data: {fileID: 0}
   ColliderDataList:
-  - boardTileType: 1
+  - boardTileType: 0
     collider: {fileID: 3025059710897255951}
-  - boardTileType: 2
+  - boardTileType: 1
     collider: {fileID: 3555144779560392382}
   _spriteRenderer: {fileID: 2630323046287906854}
   BoardTileState: 0
@@ -186,7 +186,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 3a9210a0af1f17941802b9288370b3ce, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e02263beee19f94fa03db513d4a332b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
