@@ -46,7 +46,6 @@ public class BoardTile : MonoBehaviour
     }
     public enum EBoardTileType
     {
-        None,
         Square,
         Hexagon
     }
