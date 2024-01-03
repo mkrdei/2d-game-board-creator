@@ -10,9 +10,7 @@ public class BoardTileBase : MonoBehaviour
     [SerializeField] private List<BoardTile_ColliderDataBase> _colliderDataList;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    
-
-    public void Init(BoardTileDataBase boardTileData)
+    public virtual void Init(BoardTileDataBase boardTileData)
     {
         Data = boardTileData;
         SetPosition();
@@ -20,28 +18,28 @@ public class BoardTileBase : MonoBehaviour
         _spriteRenderer.sprite = Data.InitialSprite;
         _spriteRenderer.color = boardTileData.InitialColor;
     }
-    private void SetCollider(EBoardTileType boardTileType)
+    internal virtual void SetCollider(EBoardTileType boardTileType)
     {
         _colliderDataList.ForEach(colliderData => { colliderData.collider.enabled = (colliderData.boardTileType == boardTileType); });
     }
-    private void SetPosition()
+    internal virtual void SetPosition()
     {
         transform.localPosition = new Vector3(Data.Coordinate.X, -Data.Coordinate.Y * StaticBoardManagerBase.SpaceBetweenTiles.y);
     }
 
-    private void OnMouseOver()
+    internal virtual void OnMouseOver()
     {
         if (BoardTileState == EBoardTileState.Selected) return;
         Data.CurrentColor = Color.red;
         _spriteRenderer.color = Data.CurrentColor;
     }
-    private void OnMouseExit()
+    internal virtual void OnMouseExit()
     {
         if (BoardTileState == EBoardTileState.Selected) return;
         Data.CurrentColor = Data.InitialColor;
         _spriteRenderer.color = Data.CurrentColor;
     }
-    private void OnMouseDown()
+    internal virtual void OnMouseDown()
     {
         BoardTileState = EBoardTileState.Selected;
         BoardTileInteractState = EBoardTileInteractState.MouseDown;

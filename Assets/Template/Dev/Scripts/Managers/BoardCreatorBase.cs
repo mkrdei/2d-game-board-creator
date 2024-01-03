@@ -12,20 +12,19 @@ public class BoardCreatorBase : MonoBehaviour
 
     [Space(10)]
     [Header("References")]
-    [SerializeField] private CameraManagerBase _cameraManager;
-    [SerializeField] private BoardTileBase _boardTilePrefab;
-    [SerializeField] private Transform _boardTileHolderTransform;
+    [SerializeField] internal CameraManagerBase _cameraManager;
+    [SerializeField] internal BoardTileBase _boardTilePrefab;
+    [SerializeField] internal Transform _boardTileHolderTransform;
 
-    [SerializeField] private BoardData _data;
+    [SerializeField] internal BoardData _data;
 
     void OnEnable()
     {
         CreateBoard();
     }
-    private void CreateBoard()
+    internal virtual void CreateBoard()
     {
         StaticBoardManagerBase.Data = _data;
-        CenterBoard();
         SetOrthographicSize();
         CreateTiles();
         OnBoardCreated?.Invoke(_data);
@@ -38,15 +37,13 @@ public class BoardCreatorBase : MonoBehaviour
             ResetScene();
         }
     }
-    private void CenterBoard()
-    {
-        _boardTileHolderTransform.transform.position = new Vector3((float)-(_data.boardSize.x - 1) / 2f * StaticBoardManagerBase.SpaceBetweenTiles.x, (float)(_data.boardSize.y - 1) / 2f * StaticBoardManagerBase.SpaceBetweenTiles.y, 0);
-    }
-    private void SetOrthographicSize()
+    internal virtual void SetOrthographicSize()
     {
         _cameraManager.OrthographicSize = (float)Mathf.Max(_data.boardSize.x, _data.boardSize.y) * 1.25f;
+        Vector3 cameraCenterPosition = new Vector3(-(float)-(_data.boardSize.x - 1) / 2f * StaticBoardManagerBase.SpaceBetweenTiles.x, -(float)(_data.boardSize.y - 1) / 2f * StaticBoardManagerBase.SpaceBetweenTiles.y, -10);
+        _cameraManager.Camera.transform.position = cameraCenterPosition;
     }
-    private void CreateTiles()
+    internal virtual void CreateTiles()
     {
         DestroyBoardTiles();
 
@@ -58,7 +55,7 @@ public class BoardCreatorBase : MonoBehaviour
                 bool isOutOfRowLimit = false;
                 if (_data.boardTileType == BoardTileBase.EBoardTileType.Hexagon)
                 {
-                    float distanceFromMiddle = Mathf.Abs((int)(_data.boardSize.y/2) - y);
+                    float distanceFromMiddle = Mathf.Abs((int)(_data.boardSize.y / 2) - y);
                     coordinate.X += distanceFromMiddle * 0.5f;
                     isOutOfRowLimit = _data.boardSize.x - distanceFromMiddle <= x;
                     if (isOutOfRowLimit) continue;
@@ -70,19 +67,19 @@ public class BoardCreatorBase : MonoBehaviour
             }
         }
     }
-    private void DestroyBoardTiles()
+    internal virtual void DestroyBoardTiles()
     {
         if (_data.boardTiles == null)
             return;
         if (_data.boardTiles.Count == 0)
             return;
-        for(int i = _data.boardTiles.Count - 1; i >= 0; i--)
+        for (int i = _data.boardTiles.Count - 1; i >= 0; i--)
         {
             Destroy(_data.boardTiles[i].gameObject);
         }
         _data.boardTiles.Clear();
     }
-    private void ResetScene()
+    internal virtual void ResetScene()
     {
         CreateBoard();
     }
@@ -96,7 +93,7 @@ public class BoardCreatorBase : MonoBehaviour
         [Space(10)]
         [Header("Settings")]
         public BoardTileBase.EBoardTileType boardTileType;
-        public Vector2 boardSize = new Vector2(5,5);
+        public Vector2 boardSize = new Vector2(5, 5);
         public UnityEngine.Color initialBoardTileColor;
 
         [Space(10)]
