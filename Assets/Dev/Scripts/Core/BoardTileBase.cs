@@ -4,19 +4,19 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
 
-public class BoardTile : MonoBehaviour
+public class BoardTileBase : MonoBehaviour
 {
-    public BoardTileData Data;
-    [SerializeField] private List<BoardTile_ColliderData> _colliderDataList;
+    public BoardTileDataBase Data;
+    [SerializeField] private List<BoardTile_ColliderDataBase> _colliderDataList;
     [SerializeField] private SpriteRenderer _spriteRenderer;
 
     
 
-    public void Init(BoardTileData boardTileData)
+    public void Init(BoardTileDataBase boardTileData)
     {
         Data = boardTileData;
         SetPosition();
-        SetCollider(BoardManager.Data.boardTileType);
+        SetCollider(StaticBoardManagerBase.Data.boardTileType);
         _spriteRenderer.sprite = Data.InitialSprite;
         _spriteRenderer.color = boardTileData.InitialColor;
     }
@@ -26,7 +26,7 @@ public class BoardTile : MonoBehaviour
     }
     private void SetPosition()
     {
-        transform.localPosition = new Vector3(Data.Coordinate.X, -Data.Coordinate.Y * BoardManager.SpaceBetweenTiles.y);
+        transform.localPosition = new Vector3(Data.Coordinate.X, -Data.Coordinate.Y * StaticBoardManagerBase.SpaceBetweenTiles.y);
     }
 
     private void OnMouseOver()

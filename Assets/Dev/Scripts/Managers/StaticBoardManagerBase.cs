@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static BoardCreator;
-using static BoardTile;
+using static BoardCreatorBase;
+using static BoardTileBase;
 
-public static class BoardManager
+public static class StaticBoardManagerBase
 {
     public static BoardData Data;
     public static Vector2 SpaceBetweenTiles

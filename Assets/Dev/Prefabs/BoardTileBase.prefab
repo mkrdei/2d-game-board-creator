@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3025059710897255951}
   - component: {fileID: 3555144779560392382}
   m_Layer: 0
-  m_Name: BoardTile
+  m_Name: BoardTileBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,8 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf42ee4ce2cbc534eae8002a623e0014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
-  ColliderDataList:
+  Data:
+    Coordinate:
+      X: 0
+      Y: 0
+    Active: 0
+    Visible: 0
+    InitialSprite: {fileID: 0}
+    InitialColor: {r: 0, g: 0, b: 0, a: 0}
+    CurrentColor: {r: 0, g: 0, b: 0, a: 0}
+  _colliderDataList:
   - boardTileType: 0
     collider: {fileID: 3025059710897255951}
   - boardTileType: 1

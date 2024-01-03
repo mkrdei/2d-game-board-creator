@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class BoardTile_SpriteData
+public class BoardTile_SpriteDataBase
 {
-    public BoardTile.EBoardTileType boardTileType;
+    public BoardTileBase.EBoardTileType boardTileType;
     public Sprite sprite;
 }

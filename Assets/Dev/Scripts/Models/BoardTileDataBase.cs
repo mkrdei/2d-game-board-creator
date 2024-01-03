@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class BoardTileData
+public class BoardTileDataBase
 {
     public Coordinate Coordinate;
     public bool Active;
@@ -14,8 +14,8 @@ public class BoardTileData
     public Color InitialColor;
     public Color CurrentColor;
 
-    public BoardTileData() { }
-    public BoardTileData(BoardTile.EBoardTileType boardTileType, Coordinate coordinate, bool active, bool visible, Sprite sprite, Color initialColor, Color currentColor) 
+    public BoardTileDataBase() { }
+    public BoardTileDataBase(BoardTileBase.EBoardTileType boardTileType, Coordinate coordinate, bool active, bool visible, Sprite sprite, Color initialColor, Color currentColor) 
     {
         Coordinate = coordinate;
         Active = active;

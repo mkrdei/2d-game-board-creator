@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class BoardTile_ColliderData
+public class BoardTile_ColliderDataBase
 {
-    public BoardTile.EBoardTileType boardTileType;
+    public BoardTileBase.EBoardTileType boardTileType;
     public Collider2D collider;
 }
