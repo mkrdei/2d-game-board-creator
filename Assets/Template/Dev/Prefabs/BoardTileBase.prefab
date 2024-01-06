@@ -48,22 +48,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
+    BoardTileType: 0
+    BoardTileState: 0
     Coordinate:
       X: 0
       Y: 0
     Active: 0
+    Locked: 0
     Visible: 0
-    InitialSprite: {fileID: 0}
-    InitialColor: {r: 0, g: 0, b: 0, a: 0}
-    CurrentColor: {r: 0, g: 0, b: 0, a: 0}
+  spriteDataList:
+  - boardTileType: 0
+    sprite: {fileID: 7482667652216324306, guid: 3a9210a0af1f17941802b9288370b3ce, type: 3}
+  - boardTileType: 1
+    sprite: {fileID: 21300000, guid: 3e02263beee19f94fa03db513d4a332b, type: 3}
   _colliderDataList:
   - boardTileType: 0
     collider: {fileID: 3025059710897255951}
   - boardTileType: 1
     collider: {fileID: 3555144779560392382}
   _spriteRenderer: {fileID: 2630323046287906854}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  hoverColor: {r: 1, g: 0, b: 0, a: 1}
+  selectedColor: {r: 0.061154485, g: 1, b: 0, a: 1}
   BoardTileState: 0
-  BoardTileInteractState: 0
 --- !u!61 &3025059710897255951
 BoxCollider2D:
   m_ObjectHideFlags: 0
