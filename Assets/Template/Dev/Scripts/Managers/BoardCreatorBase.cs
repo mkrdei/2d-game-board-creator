@@ -18,7 +18,7 @@ public class BoardCreatorBase : MonoBehaviour
 
     [SerializeField] internal BoardData _data;
 
-    void OnEnable()
+    internal virtual void OnEnable()
     {
         CreateBoard();
     }
@@ -30,7 +30,7 @@ public class BoardCreatorBase : MonoBehaviour
         OnBoardCreated?.Invoke(_data);
     }
 
-    void Update()
+    internal virtual void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
