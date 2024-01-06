@@ -6,7 +6,7 @@ using static BoardTileBase;
 
 public static class StaticBoardManagerBase
 {
-    public static BoardData Data;
+    public static BoardDataBase Data;
     public static Vector2 SpaceBetweenTiles
     {
         get

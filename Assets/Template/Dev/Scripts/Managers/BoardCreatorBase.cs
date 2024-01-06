@@ -8,14 +8,17 @@ using UnityEngine;
 
 public class BoardCreatorBase : MonoBehaviour
 {
-    public static Action<BoardData> OnBoardCreated;
+    public static Action<BoardDataBase> OnBoardCreated;
+
+    [Header("Instantiated Prefab Lists")]
+    public List<BoardTileBase> boardTiles;
 
     [Header("References")]
     [SerializeField] internal CameraManagerBase _cameraManager;
     [SerializeField] internal BoardTileBase _boardTilePrefab;
     [SerializeField] internal Transform _boardTileHolderTransform;
 
-    [SerializeField] internal BoardData _data;
+    [SerializeField] internal BoardDataBase _data;
 
     internal virtual void OnEnable()
     {
@@ -62,36 +65,24 @@ public class BoardCreatorBase : MonoBehaviour
                 var boardTile = Instantiate(_boardTilePrefab, _boardTileHolderTransform);
                 BoardTileDataBase boardTile_Data = new BoardTileDataBase((int)_data.boardTileType, (int)BoardTileBase.EBoardTileState.None, coordinate, true, false, true);
                 boardTile.Init(boardTile_Data);
-                _data.boardTiles.Add(boardTile);
+                boardTiles.Add(boardTile);
             }
         }
     }
     internal virtual void DestroyBoardTiles()
     {
-        if (_data.boardTiles == null)
+        if (boardTiles == null)
             return;
-        if (_data.boardTiles.Count == 0)
+        if (boardTiles.Count == 0)
             return;
-        for (int i = _data.boardTiles.Count - 1; i >= 0; i--)
+        for (int i = boardTiles.Count - 1; i >= 0; i--)
         {
-            Destroy(_data.boardTiles[i].gameObject);
+            Destroy(boardTiles[i].gameObject);
         }
-        _data.boardTiles.Clear();
+        boardTiles.Clear();
     }
     internal virtual void ResetScene()
     {
         CreateBoard();
-    }
-
-    [Serializable]
-    public class BoardData
-    {
-        [Header("Settings")]
-        public BoardTileBase.EBoardTileType boardTileType;
-        public Vector2 boardSize = new Vector2(5, 5);
-
-        [Space(10)]
-        [Header("Instantiated Prefab Lists")]
-        public List<BoardTileBase> boardTiles;
     }
 }
