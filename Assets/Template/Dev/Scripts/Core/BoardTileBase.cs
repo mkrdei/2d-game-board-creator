@@ -7,16 +7,19 @@ using UnityEngine;
 public class BoardTileBase : MonoBehaviour
 {
     public BoardTileDataBase Data;
-    [SerializeField] private List<BoardTile_ColliderDataBase> _colliderDataList;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-
+    [SerializeField] internal List<BoardTile_SpriteDataBase> spriteDataList;
+    [SerializeField] internal List<BoardTile_ColliderDataBase> _colliderDataList;
+    [SerializeField] internal SpriteRenderer _spriteRenderer;
+    [SerializeField] internal Color defaultColor;
+    [SerializeField] internal Color hoverColor;
+    [SerializeField] internal Color selectedColor;
     public virtual void Init(BoardTileDataBase boardTileData)
     {
         Data = boardTileData;
         SetPosition();
         SetCollider(StaticBoardManagerBase.Data.boardTileType);
-        _spriteRenderer.sprite = Data.InitialSprite;
-        _spriteRenderer.color = boardTileData.InitialColor;
+        _spriteRenderer.sprite = spriteDataList.Find(j => (int)j.boardTileType == Data.BoardTileType).sprite;
+        _spriteRenderer.color = defaultColor;
     }
     internal virtual void SetCollider(EBoardTileType boardTileType)
     {
@@ -30,21 +33,23 @@ public class BoardTileBase : MonoBehaviour
     internal virtual void OnMouseOver()
     {
         if (BoardTileState == EBoardTileState.Selected) return;
-        Data.CurrentColor = Color.red;
-        _spriteRenderer.color = Data.CurrentColor;
+        BoardTileState = EBoardTileState.Hovered;
+        _spriteRenderer.color = hoverColor;
+        Data.BoardTileState = (int)BoardTileState;
     }
     internal virtual void OnMouseExit()
     {
         if (BoardTileState == EBoardTileState.Selected) return;
-        Data.CurrentColor = Data.InitialColor;
-        _spriteRenderer.color = Data.CurrentColor;
+        BoardTileState = EBoardTileState.None;
+        _spriteRenderer.color = defaultColor;
+        Data.BoardTileState = (int)BoardTileState;
     }
     internal virtual void OnMouseDown()
     {
+        if (BoardTileState == EBoardTileState.Selected) return;
         BoardTileState = EBoardTileState.Selected;
-        BoardTileInteractState = EBoardTileInteractState.MouseDown;
-        Data.CurrentColor = Color.green;
-        _spriteRenderer.color = Data.CurrentColor;
+        _spriteRenderer.color = selectedColor;
+        Data.BoardTileState = (int) BoardTileState;
     }
     public enum EBoardTileType
     {
@@ -54,15 +59,10 @@ public class BoardTileBase : MonoBehaviour
     public enum EBoardTileState
     {
         None,
+        Hovered,
         Selected,
     }
     public EBoardTileState BoardTileState;
-    public enum EBoardTileInteractState
-    {
-        None,
-        Dragging,
-        MouseDown
-    }
-    public EBoardTileInteractState BoardTileInteractState;
+
 
 }

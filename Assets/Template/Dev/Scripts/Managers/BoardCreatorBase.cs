@@ -10,7 +10,6 @@ public class BoardCreatorBase : MonoBehaviour
 {
     public static Action<BoardData> OnBoardCreated;
 
-    [Space(10)]
     [Header("References")]
     [SerializeField] internal CameraManagerBase _cameraManager;
     [SerializeField] internal BoardTileBase _boardTilePrefab;
@@ -61,7 +60,7 @@ public class BoardCreatorBase : MonoBehaviour
                     if (isOutOfRowLimit) continue;
                 }
                 var boardTile = Instantiate(_boardTilePrefab, _boardTileHolderTransform);
-                BoardTileDataBase boardTile_Data = new BoardTileDataBase(_data.boardTileType, coordinate, true, true, _data.spriteDataList.Find(j => j.boardTileType == _data.boardTileType).sprite, _data.initialBoardTileColor, _data.initialBoardTileColor);
+                BoardTileDataBase boardTile_Data = new BoardTileDataBase((int)_data.boardTileType, (int)BoardTileBase.EBoardTileState.None, coordinate, true, false, true);
                 boardTile.Init(boardTile_Data);
                 _data.boardTiles.Add(boardTile);
             }
@@ -87,14 +86,9 @@ public class BoardCreatorBase : MonoBehaviour
     [Serializable]
     public class BoardData
     {
-        [Space(10)]
-        public List<BoardTile_SpriteDataBase> spriteDataList;
-
-        [Space(10)]
         [Header("Settings")]
         public BoardTileBase.EBoardTileType boardTileType;
         public Vector2 boardSize = new Vector2(5, 5);
-        public UnityEngine.Color initialBoardTileColor;
 
         [Space(10)]
         [Header("Instantiated Prefab Lists")]
