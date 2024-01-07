@@ -63,7 +63,7 @@ public class BoardCreatorBase : MonoBehaviour
                     if (isOutOfRowLimit) continue;
                 }
                 var boardTile = Instantiate(_boardTilePrefab, _boardTileHolderTransform);
-                BoardTileDataBase boardTile_Data = new BoardTileDataBase((int)_data.boardTileType, (int)BoardTileBase.EBoardTileState.None, coordinate, true, false, true);
+                BoardTileDataBase boardTile_Data = new BoardTileDataBase($"{x}{y}",(int)_data.boardTileType, (int)BoardTileBase.EBoardTileState.None, coordinate, true, false, true);
                 boardTile.Init(boardTile_Data);
                 boardTiles.Add(boardTile);
             }

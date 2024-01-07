@@ -8,6 +8,7 @@ using static BoardTileBase;
 [Serializable]
 public class BoardTileDataBase
 {
+    public string Id;
     public int BoardTileType;
     public int BoardTileState;
     public Coordinate Coordinate;
@@ -16,8 +17,9 @@ public class BoardTileDataBase
     public bool Visible;
 
     public BoardTileDataBase() { }
-    public BoardTileDataBase(int boardTileType, int boardTileState, Coordinate coordinate, bool active, bool locked, bool visible) 
+    public BoardTileDataBase(string id, int boardTileType, int boardTileState, Coordinate coordinate, bool active, bool locked, bool visible) 
     {
+        Id = id;
         BoardTileType = boardTileType;
         BoardTileState = boardTileState;
         Coordinate = coordinate;
