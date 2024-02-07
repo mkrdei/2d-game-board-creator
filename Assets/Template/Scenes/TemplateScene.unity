@@ -561,8 +561,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveableTileGroupPrefab: {fileID: 433581243805453975, guid: 980b3ee078577a6429e1bc9ccc086b88, type: 3}
-  gridLayoutGroup: {fileID: 1979329198}
-  groupCountLimit: 3
+  gridLayoutGroup: {fileID: 1979329200}
+  groupCountLimit: 7
 --- !u!1 &1686371857
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,7 +628,7 @@ MonoBehaviour:
   _boardTilePrefab: {fileID: 8781285674243306395, guid: 49484229b1d71c74a90c91da196234d2, type: 3}
   _boardTileHolderTransform: {fileID: 1686371858}
   _data:
-    boardTileType: 0
+    boardTileType: 1
     boardSize: {x: 5, y: 5}
     boardTileDataList: []
 --- !u!4 &1807959551
@@ -646,15 +646,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1979329198 stripped
+--- !u!114 &1979329200 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8470319136771058431, guid: ae47574c29a7b1d4f8ce4c9f887d3d0e, type: 3}
+  m_CorrespondingSourceObject: {fileID: 4795883646690187997, guid: ae47574c29a7b1d4f8ce4c9f887d3d0e, type: 3}
   m_PrefabInstance: {fileID: 8470319138166046801}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: f17e6fedf1a14c1d9cc57983272aaf85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2037743770
